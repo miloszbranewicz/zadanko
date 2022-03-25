@@ -1,0 +1,76 @@
+@use "./variables";
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    
+    
+}
+.slider, .slider-faker {
+    background-color: variables.$pprimary ;
+    width: 90%;
+    margin-left:auto;
+}
+.slider-faker {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(-100%);
+}
+.description {
+    margin-top: 2rem;
+    max-width: 60ch;
+    font-size: .75rem;
+}
+.slide__slide, .slide-f {
+    display: flex !important;
+}
+.left {
+    padding: 3rem 2rem;
+    flex-grow: 1;
+}
+.right {
+    width: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bg {
+    display: block;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.title {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+}
+.link {
+    position: relative;
+    display:block;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    margin: 4rem 0;
+    width:fit-content;
+}
+
+.link:before {
+    top: -15px;
+    position: absolute;
+    width:100%;
+    height:2px;
+    background-color: variables.$pprimary;
+    content: "",
+}
+.navigation {
+    position: absolute;
+    display: flex;
+    transform: translate(-50%,-50%);
+    bottom: 10px;
+    left: 50%;
+}
+.fake {
+    width: 10%;
+}
