@@ -1,3 +1,12 @@
 // Overrides
-$pprimary: #ffc0cb86;
 $font-family-base: 'Source Serif Pro', serif;
+$primary:#ffc1cb;
+$secondary: #fffafa;
+
+// custom variables
+$slide-background-color: $secondary;
+$slide-description-font-size: 0.9rem;
+$slide-title-font-size: 3.5rem;
+$slide-link-decoration-color: $primary;
+$sliders-navigation-color: $primary;
+$sliders-navigation-font-size: 2rem;

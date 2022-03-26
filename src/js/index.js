@@ -1,44 +1,48 @@
-// $example_data = [
-//     0 => [
-//       'title' => 'Z pasji do <strong>piękna</strong> <br>z pasji do <strong>mody</strong>',
-//       'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip e',
-//       'link' => [
-//         'url' => 'https://www.youtube.com/watch?v=CelgqNnv0wU',
-//         'title' => 'zobacz więcej'
-//       ]
-//     ],
-//     1 => [
-//       'title' => 'Z pasji do <strong>piękna</strong> <br>z pasji do <strong>wody</strong>',
-//       'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip e',
-//       'link' => [
-//         'url' => 'https://www.youtube.com/watch?v=CelgqNnv0wU',
-//         'title' => 'zobacz więcej'
-//       ]
-//     ],
-//     2 => [
-//       'title' => 'Z pasji do <strong>piękna</strong> <br>z pasji do <strong>sody</strong>',
-//       'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip e',
-//       'link' => [
-//         'url' => 'https://www.youtube.com/watch?v=CelgqNnv0wU',
-//         'title' => 'zobacz więcej'
-//       ]
-//     ]
-//   ];
-$('.slider-faker').slick({
+const $mainSlider = $('.slick-slider');
+const $sideSlider = $('.slider-side');
+const $DOMcurrentSlide = $('.slides-count__current-slide')
+const $DOMtotalSlides = $('.slides-count__total-slides')
+const $arrowPrev = $('.sliders-navigation__prev')
+const $arrowNext = $('.sliders-navigation__next')
+
+$mainSlider.on('init', function (event, slick) {
+    const slideCount = slick.slideCount
+
+    if (slideCount < 9) {
+        $DOMtotalSlides.text('/ 0'+slideCount)
+        $DOMcurrentSlide.text(`0${slick.currentSlide+1}`)
+
+    }else {
+        $DOMtotalSlides.text(slideCount)
+        $DOMcurrentSlide.text(`${slick.currentSlide+1}`)
+    }
+})
+$mainSlider.slick({
+    infinite: true,
+    prevArrow: $arrowPrev,
+    nextArrow: $arrowNext,
+})
+
+$sideSlider.slick({
     infinite:true,
     arrows:false,
-    adaptiveHeight:true,
-    asNavFor: '.slider',
-    initialSlide: 3
-
+    initialSlide: $mainSlider.slick('getSlick').slideCount - 1,
+    fade:true
 })
 
 
-$('.slider').slick({
-    infinite: true,
-    // slidesToShow: 3,
-    // slidesToScroll: 3,
-    prevArrow: $('.prev'),
-    nextArrow: $('.next'),
-    asNavFor: '.slider-faker'
-  });
+$mainSlider.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+    if (nextSlide > 0) {
+        $sideSlider.slick("slickGoTo", nextSlide - 1,false)
+        
+    }else {
+        $sideSlider.slick("slickGoTo", slick.slideCount -1,false)
+    }
+    if (slick.slickCount > 9 ){
+        $DOMcurrentSlide.text(`${nextSlide+1}`)
+    }else {
+        $DOMcurrentSlide.text(`0${nextSlide+1}`)
+
+    }
+})
+
