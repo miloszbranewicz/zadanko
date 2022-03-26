@@ -9,12 +9,12 @@ $mainSlider.on('init', function (event, slick) {
     const slideCount = slick.slideCount
 
     if (slideCount < 9) {
-        $DOMtotalSlides.text('/ 0'+slideCount)
-        $DOMcurrentSlide.text(`0${slick.currentSlide+1}`)
+        $DOMtotalSlides.text('/ 0' + slideCount)
+        $DOMcurrentSlide.text(`0${slick.currentSlide + 1}`)
 
-    }else {
+    } else {
         $DOMtotalSlides.text(slideCount)
-        $DOMcurrentSlide.text(`${slick.currentSlide+1}`)
+        $DOMcurrentSlide.text(`${slick.currentSlide + 1}`)
     }
 })
 $mainSlider.slick({
@@ -24,24 +24,24 @@ $mainSlider.slick({
 })
 
 $sideSlider.slick({
-    infinite:true,
-    arrows:false,
+    infinite: true,
+    arrows: false,
     initialSlide: $mainSlider.slick('getSlick').slideCount - 1,
-    fade:true
+    fade: true
 })
 
 
 $mainSlider.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
     if (nextSlide > 0) {
-        $sideSlider.slick("slickGoTo", nextSlide - 1,false)
-        
-    }else {
-        $sideSlider.slick("slickGoTo", slick.slideCount -1,false)
+        $sideSlider.slick("slickGoTo", nextSlide - 1, false)
+
+    } else {
+        $sideSlider.slick("slickGoTo", slick.slideCount - 1, false)
     }
-    if (slick.slickCount > 9 ){
-        $DOMcurrentSlide.text(`${nextSlide+1}`)
-    }else {
-        $DOMcurrentSlide.text(`0${nextSlide+1}`)
+    if (slick.slickCount > 9) {
+        $DOMcurrentSlide.text(`${nextSlide + 1}`)
+    } else {
+        $DOMcurrentSlide.text(`0${nextSlide + 1}`)
 
     }
 })
